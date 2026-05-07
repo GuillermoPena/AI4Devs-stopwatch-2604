@@ -1,0 +1,366 @@
+/* ═══════════════════════════════════════════════
+   VARIABLES & RESET
+═══════════════════════════════════════════════ */
+:root {
+  --color-primary:   #1a3a6b;
+  --color-primary-d: #122a52;
+  --color-green:     #00cc00;
+  --color-green-d:   #007700;
+  --color-green-bg:  #e8f8e8;
+  --color-red:       #ee0000;
+  --color-red-d:     #990000;
+  --color-gray:      #b0b0b0;
+  --color-gray-d:    #888888;
+  --color-display-bg:#dde6f5;
+  --color-display-br:#9ab0d0;
+  --color-body-bg:   #f0f4f8;
+  --font-display:    'Share Tech Mono', monospace;
+  --font-mono:       'Share Tech Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: var(--font-mono);
+  background: var(--color-body-bg);
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════════
+   SCREEN ROUTING
+═══════════════════════════════════════════════ */
+.screen {
+  display: none;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+}
+.screen.active {
+  display: flex;
+}
+
+/* ═══════════════════════════════════════════════
+   HEADER & FOOTER
+═══════════════════════════════════════════════ */
+.app-header {
+  background: var(--color-primary);
+  color: #fff;
+  text-align: center;
+  padding: 10px 16px;
+  font-size: clamp(12px, 2vw, 16px);
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  border-bottom: 3px solid var(--color-primary-d);
+}
+
+/* Fix 1: header link — visually identical to plain text, fully clickable */
+.header-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.app-footer {
+  background: var(--color-primary);
+  padding: 8px 16px;
+  flex-shrink: 0;
+  border-top: 3px solid var(--color-primary-d);
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+}
+.home-footer { min-height: 16px; padding: 8px; }
+
+/* ═══════════════════════════════════════════════
+   BUTTONS — BASE
+═══════════════════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  font-family: var(--font-mono);
+  font-weight: bold;
+  font-size: clamp(14px, 2.5vw, 20px);
+  min-height: 44px;
+  min-width: 44px;
+  transition: transform 0.08s ease, filter 0.08s ease, box-shadow 0.08s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:active { transform: scale(0.95); filter: brightness(0.9); }
+
+.btn-green {
+  background: var(--color-green);
+  color: #000;
+  border: 3px solid var(--color-green-d);
+  box-shadow: 0 3px 0 var(--color-green-d);
+}
+.btn-green:hover { filter: brightness(1.1); }
+
+.btn-red {
+  background: var(--color-red);
+  color: #000;
+  border: 3px solid var(--color-red-d);
+  box-shadow: 0 3px 0 var(--color-red-d);
+}
+.btn-red:hover { filter: brightness(1.1); }
+
+.btn-gray {
+  background: #d0d0d0;
+  color: #222;
+  border: 3px solid var(--color-gray);
+  box-shadow: 0 3px 0 var(--color-gray);
+}
+.btn-gray:hover { filter: brightness(1.05); }
+
+.btn-large {
+  font-size: clamp(18px, 3.5vw, 28px);
+  padding: 14px 28px;
+  min-width: 160px;
+  min-height: 60px;
+  border-radius: 14px;
+}
+
+.btn-back {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-radius: 8px;
+  font-size: 15px;
+  padding: 6px 16px;
+  min-height: 38px;
+  letter-spacing: 0.05em;
+}
+.btn-back:hover { background: rgba(255,255,255,0.15); }
+
+/* ═══════════════════════════════════════════════
+   DIGIT BUTTONS (Countdown numpad)
+═══════════════════════════════════════════════ */
+.btn-digit {
+  background: var(--color-green);
+  color: #000;
+  border: 3px solid var(--color-green-d);
+  box-shadow: 0 3px 0 var(--color-green-d);
+  width: clamp(50px, 9vw, 80px);
+  height: clamp(50px, 9vw, 80px);
+  font-size: clamp(16px, 3vw, 26px);
+  border-radius: 10px;
+}
+.btn-digit:hover { filter: brightness(1.12); }
+
+.btn-set {
+  background: var(--color-green);
+  color: #000;
+  border: 3px solid var(--color-green-d);
+  box-shadow: 0 3px 0 var(--color-green-d);
+  height: clamp(50px, 9vw, 80px);
+  min-width: clamp(80px, 14vw, 120px);
+  font-size: clamp(16px, 3vw, 22px);
+  border-radius: 10px;
+  flex: 1;
+}
+.btn-set:hover { filter: brightness(1.12); }
+
+/* ═══════════════════════════════════════════════
+   HOME SCREEN
+═══════════════════════════════════════════════ */
+.home-main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.home-option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  cursor: pointer;
+  padding: 32px 16px;
+  transition: box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.home-option:first-child {
+  background: var(--color-green-bg);
+}
+.home-option:last-child {
+  background: #fff;
+}
+
+.home-option:hover {
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.07);
+}
+.home-option:active {
+  box-shadow: inset 0 0 60px rgba(0,0,0,0.13);
+}
+
+.home-option h2 {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 4vw, 40px);
+  font-weight: 900;
+  color: #111;
+  letter-spacing: 0.04em;
+}
+
+.arrow-icon {
+  width: clamp(80px, 18vw, 160px);
+  height: auto;
+  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.25));
+  transition: transform 0.2s ease;
+}
+.home-option:hover .arrow-icon { transform: scale(1.08); }
+
+.home-divider {
+  width: 4px;
+  background: var(--color-primary);
+  opacity: 0.25;
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════
+   TOOL MAIN LAYOUT (Stopwatch & Countdown)
+═══════════════════════════════════════════════ */
+.tool-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(20px, 4vh, 40px);
+  padding: clamp(16px, 3vw, 32px);
+  background: var(--color-body-bg);
+}
+
+/* ═══════════════════════════════════════════════
+   TIME DISPLAY
+═══════════════════════════════════════════════ */
+.display-wrapper {
+  width: 100%;
+  max-width: 700px;
+}
+
+.display-box {
+  background: var(--color-display-bg);
+  border: 3px solid var(--color-display-br);
+  border-radius: 20px;
+  padding: clamp(12px, 2vw, 24px) clamp(16px, 3vw, 32px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.1);
+  position: relative;
+  /* Fix: fixed width so justify-content: center never recalculates position */
+  width: 100%;
+}
+
+#sw-time, #cd-time {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 10vw, 96px);
+  font-weight: 400;
+  color: #111;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  text-shadow: 1px 1px 0 rgba(255,255,255,0.6);
+  /* Fix 2: tabular (monospaced) figures — every digit occupies identical width,
+     preventing horizontal layout shifts as numbers change */
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  /* Reserve space for the widest possible value (HH:MM:SS = 8 chars + 2 colons) */
+  min-width: 8ch;
+  display: inline-block;
+  text-align: center;
+}
+
+.millis {
+  font-family: var(--font-display);
+  font-size: clamp(14px, 2.5vw, 28px);
+  color: #444;
+  padding-bottom: clamp(4px, 1vw, 10px);
+  letter-spacing: 0.05em;
+  /* Fix: tabular figures for milliseconds — stable width across 000–999 */
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  display: inline-block;
+  min-width: 3ch;
+  text-align: center;
+}
+
+/* Blink animation when countdown finishes */
+@keyframes blink {
+  0%, 100% { background: var(--color-display-bg); }
+  50%       { background: #ffcccc; border-color: var(--color-red); }
+}
+.display-box.blinking {
+  animation: blink 0.5s ease-in-out infinite;
+}
+.display-box.blinking #cd-time {
+  color: var(--color-red);
+}
+
+/* ═══════════════════════════════════════════════
+   STOPWATCH CONTROLS
+═══════════════════════════════════════════════ */
+.sw-controls {
+  display: flex;
+  gap: clamp(16px, 3vw, 32px);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ═══════════════════════════════════════════════
+   COUNTDOWN NUMPAD
+═══════════════════════════════════════════════ */
+.cd-numpad {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.5vw, 16px);
+  width: 100%;
+  max-width: 580px;
+}
+
+.numpad-row {
+  display: flex;
+  gap: clamp(8px, 1.5vw, 16px);
+  justify-content: center;
+  align-items: center;
+}
+
+/* ═══════════════════════════════════════════════
+   COUNTDOWN RUN CONTROLS
+═══════════════════════════════════════════════ */
+.cd-run-controls {
+  display: flex;
+  gap: clamp(16px, 3vw, 40px);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hidden { display: none !important; }
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE — MOBILE
+═══════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .home-main { flex-direction: column; }
+  .home-divider { width: 100%; height: 4px; }
+  .home-option { padding: 20px 12px; gap: 12px; }
+
+  .numpad-row { gap: 6px; }
+  .btn-digit  { width: 46px; height: 46px; font-size: 15px; }
+  .btn-set    { height: 46px; min-width: 72px; font-size: 15px; }
+
+  .btn-large { font-size: 18px; padding: 12px 20px; min-width: 130px; }
+}
+
+@media (max-width: 360px) {
+  #sw-time, #cd-time { font-size: 36px; }
+  .btn-digit  { width: 40px; height: 40px; font-size: 13px; }
+}

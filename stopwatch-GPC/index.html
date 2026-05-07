@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stopwatch & Countdown</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       SCREEN 0 — HOME MENU
+  ═══════════════════════════════════════════ -->
+  <section id="screen-home" class="screen active">
+    <header class="app-header">
+      <a href="https://www.online-stopwatch.com" target="_blank" rel="noopener noreferrer" class="header-link">www.online-stopwatch.com</a>
+    </header>
+
+    <main class="home-main">
+      <div class="home-option" id="btn-go-stopwatch">
+        <h2>Stopwatch</h2>
+        <div class="arrow-icon">
+          <svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="greenGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" style="stop-color:#00aa00"/>
+                <stop offset="100%" style="stop-color:#66ff66"/>
+              </linearGradient>
+            </defs>
+            <polygon points="50,5 95,55 72,55 72,115 28,115 28,55 5,55"
+              fill="url(#greenGrad)" stroke="#006600" stroke-width="4" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="home-divider"></div>
+
+      <div class="home-option" id="btn-go-countdown">
+        <h2>Countdown</h2>
+        <div class="arrow-icon">
+          <svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="redGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style="stop-color:#cc0000"/>
+                <stop offset="100%" style="stop-color:#ff6666"/>
+              </linearGradient>
+            </defs>
+            <polygon points="50,115 95,65 72,65 72,5 28,5 28,65 5,65"
+              fill="url(#redGrad)" stroke="#660000" stroke-width="4" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </main>
+
+    <footer class="app-footer home-footer"></footer>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SCREEN 1 — STOPWATCH
+  ═══════════════════════════════════════════ -->
+  <section id="screen-stopwatch" class="screen">
+    <header class="app-header">
+      <a href="https://www.online-stopwatch.com" target="_blank" rel="noopener noreferrer" class="header-link">www.online-stopwatch.com</a>
+    </header>
+
+    <main class="tool-main">
+      <div class="display-wrapper">
+        <div class="display-box" id="sw-display">
+          <span id="sw-time">00:00:00</span>
+          <span class="millis" id="sw-millis">000</span>
+        </div>
+      </div>
+
+      <div class="sw-controls">
+        <button class="btn btn-green btn-large" id="sw-btn-start">Start</button>
+        <button class="btn btn-gray  btn-large" id="sw-btn-clear">Clear</button>
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <button class="btn btn-back" id="sw-btn-back">&#8592; Back</button>
+    </footer>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SCREEN 2 — COUNTDOWN
+  ═══════════════════════════════════════════ -->
+  <section id="screen-countdown" class="screen">
+    <header class="app-header">
+      <a href="https://www.online-stopwatch.com" target="_blank" rel="noopener noreferrer" class="header-link">www.online-stopwatch.com</a>
+    </header>
+
+    <main class="tool-main">
+      <div class="display-wrapper">
+        <div class="display-box" id="cd-display">
+          <span id="cd-time">00:00:00</span>
+          <span class="millis" id="cd-millis">000</span>
+        </div>
+      </div>
+
+      <!-- Config phase: numpad -->
+      <div id="cd-numpad" class="cd-numpad">
+        <div class="numpad-row">
+          <button class="btn btn-digit" data-digit="5">5</button>
+          <button class="btn btn-digit" data-digit="6">6</button>
+          <button class="btn btn-digit" data-digit="7">7</button>
+          <button class="btn btn-digit" data-digit="8">8</button>
+          <button class="btn btn-digit" data-digit="9">9</button>
+          <button class="btn btn-set"   id="cd-btn-set">Set</button>
+        </div>
+        <div class="numpad-row">
+          <button class="btn btn-digit" data-digit="0">0</button>
+          <button class="btn btn-digit" data-digit="1">1</button>
+          <button class="btn btn-digit" data-digit="2">2</button>
+          <button class="btn btn-digit" data-digit="3">3</button>
+          <button class="btn btn-digit" data-digit="4">4</button>
+          <button class="btn btn-gray"  id="cd-btn-clear-cfg">Clear</button>
+        </div>
+      </div>
+
+      <!-- Run phase: start + clear -->
+      <div id="cd-run-controls" class="cd-run-controls hidden">
+        <button class="btn btn-green btn-large" id="cd-btn-start">Start</button>
+        <button class="btn btn-red   btn-large" id="cd-btn-clear-run">Clear</button>
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <button class="btn btn-back" id="cd-btn-back">&#8592; Back</button>
+    </footer>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
